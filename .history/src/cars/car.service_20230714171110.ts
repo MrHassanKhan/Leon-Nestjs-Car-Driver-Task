@@ -1,12 +1,7 @@
-import {
-  HttpException,
-  HttpStatus,
-  Inject,
-  Injectable,
-  forwardRef,
-} from '@nestjs/common';
+import { HttpException, HttpStatus, Inject, Injectable, forwardRef } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { Observable, from } from 'rxjs';
 import { Car } from './entities/car.entity';
 import { CreateCarInput } from './models/create-car.model';
 import { DriverService } from 'src/drivers';
@@ -16,7 +11,6 @@ export class CarService {
   constructor(
     @InjectRepository(Car)
     private carRepository: Repository<Car>,
-    @Inject(forwardRef(() => DriverService))
     private driverService: DriverService,
   ) {}
 

@@ -32,6 +32,6 @@ export class Car {
   })
   photos: Photo[];
 
-  @ManyToOne(() => Driver, (driver) => driver.cars, { eager: true })
+  @ManyToOne(() => Driver, (driver) => driver.cars)
   driver: Driver;
 }

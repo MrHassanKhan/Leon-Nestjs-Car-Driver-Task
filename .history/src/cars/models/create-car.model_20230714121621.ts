@@ -2,7 +2,6 @@ import { Field, InputType, Int } from '@nestjs/graphql';
 import { IsString } from 'class-validator';
 import { CarStatus } from './car.enum';
 import { CreatePhotoInput } from './create-photo.model';
-import { DriverDto } from 'src/drivers';
 
 @InputType()
 export class CreateCarInput {

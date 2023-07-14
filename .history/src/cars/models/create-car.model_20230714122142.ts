@@ -20,7 +20,7 @@ export class CreateCarInput {
   @Field(() => Int)
   rentPrice: number;
   @Field(() => Int)
-  driverId: number;
+  driverId?: number;
 
   @Field(() => [CreatePhotoInput])
   photos: CreatePhotoInput[];

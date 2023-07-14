@@ -1,31 +1,19 @@
-import {
-  HttpException,
-  HttpStatus,
-  Inject,
-  Injectable,
-  forwardRef,
-} from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { Observable, from } from 'rxjs';
 import { Car } from './entities/car.entity';
 import { CreateCarInput } from './models/create-car.model';
-import { DriverService } from 'src/drivers';
 
 @Injectable()
 export class CarService {
   constructor(
     @InjectRepository(Car)
     private carRepository: Repository<Car>,
-    @Inject(forwardRef(() => DriverService))
-    private driverService: DriverService,
   ) {}
 
-  async save(createCarInput: CreateCarInput): Promise<Car> {
-    let driver = null;
-    if (createCarInput.driverId) {
-      driver = await this.driverService.findOne(createCarInput.driverId);
-    }
-    return this.carRepository.save({ ...createCarInput, driver: driver });
+  save(createCarInput: CreateCarInput): Observable<Car> {
+    return from(this.carRepository.save({ ...createCarInput }));
   }
 
   getAll(): Promise<Car[]> {

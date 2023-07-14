@@ -1,11 +1,12 @@
 import { Field, InputType, Int } from '@nestjs/graphql';
 import { IsString } from 'class-validator';
 import { CarStatus } from './car.enum';
-import { CreatePhotoInput } from './create-photo.model';
-import { DriverDto } from 'src/drivers';
+import { UpdatePhotoInput } from './update-photo.model';
 
 @InputType()
-export class CreateCarInput {
+export class UpdateCarInput {
+  @Field(() => Int)
+  id: number;
   @Field(() => String)
   @IsString()
   number: string;
@@ -19,9 +20,10 @@ export class CreateCarInput {
 
   @Field(() => Int)
   rentPrice: number;
-  @Field(() => Int)
-  driverId: number;
 
-  @Field(() => [CreatePhotoInput])
-  photos: CreatePhotoInput[];
+  @Field(() => Int)
+  driverId?: number;
+
+  @Field(() => [UpdatePhotoInput])
+  photos: UpdatePhotoInput[];
 }
