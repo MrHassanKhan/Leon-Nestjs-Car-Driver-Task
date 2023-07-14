@@ -1,0 +1,83 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type PhotoDto {
+  id: Int!
+  name: String!
+}
+
+type CarDto {
+  id: Int!
+  number: String!
+  model: String!
+  status: CarStatus!
+  rentPrice: Int!
+  photos: [PhotoDto!]!
+}
+
+enum CarStatus {
+  Active
+  Available
+  InActive
+}
+
+type DriverDto {
+  id: Int!
+  name: String
+  license: String
+  uploadedLicenseFileName: String
+}
+
+type Query {
+  drivers: [DriverDto!]!
+  driver(id: Int!): DriverDto!
+  cars: [CarDto!]!
+  car(id: Int!): CarDto!
+}
+
+type Mutation {
+  createDriver(createDriverInput: CreateDriverInput!): DriverDto!
+  updateDriver(updateDriverInput: UpdateDriverInput!): DriverDto!
+  createCar(createCarInput: CreateCarInput!): CarDto!
+  updateCar(updateCarInput: UpdateCarInput!): CarDto!
+}
+
+input CreateDriverInput {
+  name: String!
+  license: String!
+  uploadedLicenseFileName: String!
+}
+
+input UpdateDriverInput {
+  id: Int!
+  name: String!
+  license: String!
+  uploadedLicenseFileName: String!
+}
+
+input CreateCarInput {
+  number: String!
+  model: String!
+  status: CarStatus!
+  rentPrice: Int!
+  photos: [CreatePhotoInput!]!
+}
+
+input CreatePhotoInput {
+  name: String!
+}
+
+input UpdateCarInput {
+  id: Int!
+  number: String!
+  model: String!
+  status: CarStatus!
+  rentPrice: Int!
+  photos: [UpdatePhotoInput!]!
+}
+
+input UpdatePhotoInput {
+  id: Int!
+  name: String!
+}

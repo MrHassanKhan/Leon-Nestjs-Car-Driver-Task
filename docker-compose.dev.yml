@@ -1,0 +1,44 @@
+version: '3.4'
+
+services:
+  # leonrenttaskapi:
+  #   image: leonrenttaskapi
+  #   build:
+  #     dockerfile: Dockerfile
+  #     context: .
+  #     # Only will build development stage from our dockerfile
+  #     target: development
+  #   # Mount our host Directory to the docker container
+  #   # Mount (.) current directory to the docker container usr/src/app
+  #   # reflect file changes from host to container
+  #   volumes:
+  #     - .:/usr/src/app
+  #   env_file:
+  #   - .env
+  #    # Run in Debug Mode: npm run start:debug --> Don't forget to start your vscode debugger!
+  #   # Run in dev Mode: npm run start:dev
+  #   command: npm run start:dev
+  #   ports:
+  #     - 3000:3000
+  #   depends_on:
+  #     - db
+
+  db:
+    image: mysql:5.7
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - '3306:3306'
+    volumes:
+      - my-db:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
+  
+volumes:
+  my-db:
+    
